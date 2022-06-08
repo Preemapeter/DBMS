@@ -1,0 +1,267 @@
+student@student-OptiPlex-3050:~$ sudo mysql -u root -p
+[sudo] password for student: 
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 34
+Server version: 10.0.38-MariaDB-0ubuntu0.16.04.1 Ubuntu 16.04
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> cerate database db;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'cerate database db' at line 1
+MariaDB [(none)]> use db;
+Database changed
+MariaDB [db]> create database db;
+ERROR 1007 (HY000): Can't create database 'db'; database exists
+MariaDB [db]> create database preema;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [db]> use preema;
+Database changed
+MariaDB [preema]> create table employee(emp_no int,emp_name varchar(20),desiganation varchar(20),salary int,dob int,dept varchar(20));
+Query OK, 0 rows affected (0.21 sec)
+
+MariaDB [preema]> create table employe(emp_no int,emp_name varchar(20),desiganation varchar(20),salary int,dob int,dept_no int);
+Query OK, 0 rows affected (0.23 sec)
+
+MariaDB [preema]> insert into employe values(100,'Preema','Manager',50000,03-02-2000,1);
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [preema]> insert into employe values(101,'fathima','Executive offier',09-03-2000,2);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [preema]> insert into employe values(101,'fathima','Executive offier',35000,09-03-2000,2);
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [preema]> insert into employe values(102,'Reshma','Finanacial offier',25000,01-11-2000,3);
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [preema]> insert into employe values(103,'Sahla','Finanacial offier',25000,01-11-2000,3);
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [preema]> 
+MariaDB [preema]> delete * from employe where emp_no=103;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '* from employe where emp_no=103' at line 1
+MariaDB [preema]> delete from employe where emp_no=103;
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [preema]> select * from employe;
++--------+----------+-------------------+--------+-------+---------+
+| emp_no | emp_name | desiganation      | salary | dob   | dept_no |
++--------+----------+-------------------+--------+-------+---------+
+|    100 | Preema   | Manager           |  50000 | -1999 |       1 |
+|    101 | fathima  | Executive offier  |  35000 | -1994 |       2 |
+|    102 | Reshma   | Finanacial offier |  25000 | -2010 |       3 |
++--------+----------+-------------------+--------+-------+---------+
+3 rows in set (0.00 sec)
+
+MariaDB [preema]> update employe set dob='1999-08-02' where emp_no=1;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+MariaDB [preema]> select * from employe;
++--------+----------+-------------------+--------+-------+---------+
+| emp_no | emp_name | desiganation      | salary | dob   | dept_no |
++--------+----------+-------------------+--------+-------+---------+
+|    100 | Preema   | Manager           |  50000 | -1999 |       1 |
+|    101 | fathima  | Executive offier  |  35000 | -1994 |       2 |
+|    102 | Reshma   | Finanacial offier |  25000 | -2010 |       3 |
++--------+----------+-------------------+--------+-------+---------+
+3 rows in set (0.00 sec)
+
+MariaDB [preema]> update employe set dob='1999-08-02' where emp_no=100;
+Query OK, 1 row affected, 1 warning (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 1
+
+MariaDB [preema]> select * from employe;
++--------+----------+-------------------+--------+-------+---------+
+| emp_no | emp_name | desiganation      | salary | dob   | dept_no |
++--------+----------+-------------------+--------+-------+---------+
+|    100 | Preema   | Manager           |  50000 |  1999 |       1 |
+|    101 | fathima  | Executive offier  |  35000 | -1994 |       2 |
+|    102 | Reshma   | Finanacial offier |  25000 | -2010 |       3 |
++--------+----------+-------------------+--------+-------+---------+
+3 rows in set (0.00 sec)
+
+MariaDB [preema]> alter table employe modify dob date;
+Query OK, 3 rows affected, 3 warnings (0.85 sec)   
+Records: 3  Duplicates: 0  Warnings: 3
+
+MariaDB [preema]> update employe set dob='1999-08-02' where emp_no=100;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [preema]> select * from employe;
++--------+----------+-------------------+--------+------------+---------+
+| emp_no | emp_name | desiganation      | salary | dob        | dept_no |
++--------+----------+-------------------+--------+------------+---------+
+|    100 | Preema   | Manager           |  50000 | 1999-08-02 |       1 |
+|    101 | fathima  | Executive offier  |  35000 | 0000-00-00 |       2 |
+|    102 | Reshma   | Finanacial offier |  25000 | 0000-00-00 |       3 |
++--------+----------+-------------------+--------+------------+---------+
+3 rows in set (0.00 sec)
+
+MariaDB [preema]> update employe set dob='1999-08-02' where emp_no=101;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [preema]> update employe set dob='1999-08-02' where emp_no=102;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [preema]> insert into employe values(103,'sahla','marketing offier',15000,2000-01-01,4);
+Query OK, 1 row affected, 1 warning (0.04 sec)
+
+MariaDB [preema]> insert into employe values(104,'Anna','operating offier',15000,2000-02-10,5);
+Query OK, 1 row affected, 1 warning (0.03 sec)
+
+MariaDB [preema]> select * from employe;
++--------+----------+-------------------+--------+------------+---------+
+| emp_no | emp_name | desiganation      | salary | dob        | dept_no |
++--------+----------+-------------------+--------+------------+---------+
+|    100 | Preema   | Manager           |  50000 | 1999-08-02 |       1 |
+|    101 | fathima  | Executive offier  |  35000 | 1999-08-02 |       2 |
+|    102 | Reshma   | Finanacial offier |  25000 | 1999-08-02 |       3 |
+|    103 | sahla    | marketing offier  |  15000 | 0000-00-00 |       4 |
+|    104 | Anna     | operating offier  |  15000 | 0000-00-00 |       5 |
++--------+----------+-------------------+--------+------------+---------+
+5 rows in set (0.00 sec)
+
+MariaDB [preema]> update employe set dob='2000-08-02' where emp_no=103;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [preema]> select * from employe;
++--------+----------+-------------------+--------+------------+---------+
+| emp_no | emp_name | desiganation      | salary | dob        | dept_no |
++--------+----------+-------------------+--------+------------+---------+
+|    100 | Preema   | Manager           |  50000 | 1999-08-02 |       1 |
+|    101 | fathima  | Executive offier  |  35000 | 1999-08-02 |       2 |
+|    102 | Reshma   | Finanacial offier |  25000 | 1999-08-02 |       3 |
+|    103 | sahla    | marketing offier  |  15000 | 2000-08-02 |       4 |
+|    104 | Anna     | operating offier  |  15000 | 0000-00-00 |       5 |
++--------+----------+-------------------+--------+------------+---------+
+5 rows in set (0.00 sec)
+
+MariaDB [preema]> update employe set dob='2000-11-03' where emp_no=104;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [preema]> select * from employe;
++--------+----------+-------------------+--------+------------+---------+
+| emp_no | emp_name | desiganation      | salary | dob        | dept_no |
++--------+----------+-------------------+--------+------------+---------+
+|    100 | Preema   | Manager           |  50000 | 1999-08-02 |       1 |
+|    101 | fathima  | Executive offier  |  35000 | 1999-08-02 |       2 |
+|    102 | Reshma   | Finanacial offier |  25000 | 1999-08-02 |       3 |
+|    103 | sahla    | marketing offier  |  15000 | 2000-08-02 |       4 |
+|    104 | Anna     | operating offier  |  15000 | 2000-11-03 |       5 |
++--------+----------+-------------------+--------+------------+---------+
+5 rows in set (0.00 sec)
+
+MariaDB [preema]> select * from employe where salary>1000;
++--------+----------+-------------------+--------+------------+---------+
+| emp_no | emp_name | desiganation      | salary | dob        | dept_no |
++--------+----------+-------------------+--------+------------+---------+
+|    100 | Preema   | Manager           |  50000 | 1999-08-02 |       1 |
+|    101 | fathima  | Executive offier  |  35000 | 1999-08-02 |       2 |
+|    102 | Reshma   | Finanacial offier |  25000 | 1999-08-02 |       3 |
+|    103 | sahla    | marketing offier  |  15000 | 2000-08-02 |       4 |
+|    104 | Anna     | operating offier  |  15000 | 2000-11-03 |       5 |
++--------+----------+-------------------+--------+------------+---------+
+5 rows in set (0.00 sec)
+
+MariaDB [preema]> update employe dept_no=6 where emp_no=104;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '=6 where emp_no=104' at line 1
+MariaDB [preema]> select * from employe;
++--------+----------+-------------------+--------+------------+---------+
+| emp_no | emp_name | desiganation      | salary | dob        | dept_no |
++--------+----------+-------------------+--------+------------+---------+
+|    100 | Preema   | Manager           |  50000 | 1999-08-02 |       1 |
+|    101 | fathima  | Executive offier  |  35000 | 1999-08-02 |       2 |
+|    102 | Reshma   | Finanacial offier |  25000 | 1999-08-02 |       3 |
+|    103 | sahla    | marketing offier  |  15000 | 2000-08-02 |       4 |
+|    104 | Anna     | operating offier  |  15000 | 2000-11-03 |       5 |
++--------+----------+-------------------+--------+------------+---------+
+5 rows in set (0.00 sec)
+
+MariaDB [preema]> update employe set dept_no=6 where emp_no=104;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [preema]> select * from employe;
++--------+----------+-------------------+--------+------------+---------+
+| emp_no | emp_name | desiganation      | salary | dob        | dept_no |
++--------+----------+-------------------+--------+------------+---------+
+|    100 | Preema   | Manager           |  50000 | 1999-08-02 |       1 |
+|    101 | fathima  | Executive offier  |  35000 | 1999-08-02 |       2 |
+|    102 | Reshma   | Finanacial offier |  25000 | 1999-08-02 |       3 |
+|    103 | sahla    | marketing offier  |  15000 | 2000-08-02 |       4 |
+|    104 | Anna     | operating offier  |  15000 | 2000-11-03 |       6 |
++--------+----------+-------------------+--------+------------+---------+
+5 rows in set (0.00 sec)
+
+MariaDB [preema]> delete from employe where dept_no=6;
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [preema]> select * from employe;
++--------+----------+-------------------+--------+------------+---------+
+| emp_no | emp_name | desiganation      | salary | dob        | dept_no |
++--------+----------+-------------------+--------+------------+---------+
+|    100 | Preema   | Manager           |  50000 | 1999-08-02 |       1 |
+|    101 | fathima  | Executive offier  |  35000 | 1999-08-02 |       2 |
+|    102 | Reshma   | Finanacial offier |  25000 | 1999-08-02 |       3 |
+|    103 | sahla    | marketing offier  |  15000 | 2000-08-02 |       4 |
++--------+----------+-------------------+--------+------------+---------+
+4 rows in set (0.00 sec)
+
+MariaDB [preema]> update employe set salary=salary+5000 where designation='Manager';
+ERROR 1054 (42S22): Unknown column 'designation' in 'where clause'
+MariaDB [preema]> update employe set salary=salary+5000 where desiganation='Manager';
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [preema]> select * from employe;
++--------+----------+-------------------+--------+------------+---------+
+| emp_no | emp_name | desiganation      | salary | dob        | dept_no |
++--------+----------+-------------------+--------+------------+---------+
+|    100 | Preema   | Manager           |  55000 | 1999-08-02 |       1 |
+|    101 | fathima  | Executive offier  |  35000 | 1999-08-02 |       2 |
+|    102 | Reshma   | Finanacial offier |  25000 | 1999-08-02 |       3 |
+|    103 | sahla    | marketing offier  |  15000 | 2000-08-02 |       4 |
++--------+----------+-------------------+--------+------------+---------+
+4 rows in set (0.00 sec)
+
+MariaDB [preema]> select emp_name from employe order by emp_name;
++----------+
+| emp_name |
++----------+
+| fathima  |
+| Preema   |
+| Reshma   |
+| sahla    |
++----------+
+4 rows in set (0.00 sec)
+
+MariaDB [preema]> truncate employe;
+Query OK, 0 rows affected (0.22 sec)
+
+MariaDB [preema]> select * from employe;
+Empty set (0.00 sec)
+
+MariaDB [preema]> desc employe;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| emp_no       | int(11)     | YES  |     | NULL    |       |
+| emp_name     | varchar(20) | YES  |     | NULL    |       |
+| desiganation | varchar(20) | YES  |     | NULL    |       |
+| salary       | int(11)     | YES  |     | NULL    |       |
+| dob          | date        | YES  |     | NULL    |       |
+| dept_no      | int(11)     | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+MariaDB [preema]> 
+
